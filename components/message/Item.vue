@@ -27,7 +27,7 @@ const timestamp = computed(() => toTs(props.message.ts))
 
 <template>
   <div
-    class="grid row-auto grid-cols-[3rem,minmax(0,1fr),auto] lg:grid-cols-[4rem,minmax(0,1fr),auto] auto-cols-max gap-2 px-2 py-4 min-h-12 relative"
+    class="grid row-auto grid-cols-[3rem,minmax(0,1fr),auto] lg:grid-cols-[4rem,minmax(0,1fr),auto] auto-cols-max gap-2 px-2 py-1 min-h-12 relative"
     :class="{ 'mb-2': message.last_reply, 'animate-blink': searched }"
   >
     <span
