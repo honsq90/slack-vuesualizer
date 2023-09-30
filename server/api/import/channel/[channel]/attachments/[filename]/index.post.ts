@@ -1,12 +1,10 @@
-import { writeFile } from "fs/promises";
+import { writeFile, stat } from "fs/promises";
 
 export default defineEventHandler(async (event) => {
   const channel = decodeURIComponent(event.context.params!.channel)
   const filename = decodeURIComponent(event.context.params!.filename)
   const files = await readMultipartFormData(event);
 
-  console.log(files)
-  console.log(`Saving ${filename} for ${channel}`)
   if (!files || files.length === 0) {
     throw createError({
       statusCode: 400,
@@ -18,7 +16,11 @@ export default defineEventHandler(async (event) => {
     if (files[i].name === 'file') {
       const data = files[i].data;
       const filePath = `./public/attachments/${filename}`;
-      await writeFile(filePath, data);
+      try {
+        await stat(filePath);
+      } catch (e) {
+        await writeFile(filePath, data);
+      }
     }
   }
   event.node.res.statusCode = 201
