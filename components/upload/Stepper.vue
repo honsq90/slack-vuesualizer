@@ -16,7 +16,7 @@ const entries = ref<Entry[]>([])
 
 const channels = computed(() =>
   entries.value
-    .filter(entry => entry.directory)
+    .filter(entry => entry.directory && !entry.filename.includes("/attachments/"))
     .map(dir => dir.filename.slice(0, -1))
     .sort(),
 )
