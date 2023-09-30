@@ -27,25 +27,15 @@ const timestamp = computed(() => toTs(props.message.ts))
 
 <template>
   <div
-    class="grid row-auto grid-cols-[3rem,minmax(0,1fr),auto] lg:grid-cols-[4rem,minmax(0,1fr),auto] auto-cols-max gap-2 px-2 py-1 min-h-12 relative"
-    :class="{ 'mb-2': message.last_reply, 'animate-blink': searched }"
+    class="grid row-auto grid-cols-[3rem,minmax(0,1fr),auto] lg:grid-cols-[4rem,minmax(0,1fr),auto] auto-cols-max px-2 py-1 min-h-12 relative"
+    :class="{ 'ml-6': message.reply, 'pb-6': message.last_reply, 'animate-blink': searched }"
   >
-    <span
-      v-if="!disableReplyBar"
-      class="absolute left-9"
-      :class="{
-        'border-l-2 border-slate-800/25 dark:border-slate-400/50 h-full':
-          message.reply || hasReplies,
-        '!h-6': message.last_reply,
-        'top-4 !h-[calc(100%-1rem)]': hasReplies,
-      }"
-    />
     <UserAvatar
-      class="w-12 h-12 lg:w-14 lg:h-14 rounded-xl"
+      class="w-12 h-12 rounded-xl"
       :src="user?.profile?.image_48"
     />
     <div class="flex flex-col flex-1 overflow-hidden col-start-2">
-      <p class="mb-2">
+      <p class="mb-1">
         <span v-if="user" class="font-bold mr-4">
           {{ user.profile.display_name || user.real_name }}
         </span>
