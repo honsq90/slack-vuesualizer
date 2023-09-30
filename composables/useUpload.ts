@@ -7,7 +7,7 @@ export const useUpload = () => {
   const errors = ref(new Set<string>())
   const retriable = ref(false)
 
-  const { parseData } = useZip()
+  const { parseData, parseAttachment } = useZip()
 
   const list = ref<HTMLElement>()
 
@@ -19,6 +19,24 @@ export const useUpload = () => {
       queue.value.add(channel)
       const channelEntries = entries.filter(
         e => !e.directory && e.filename.startsWith(`${channel}/`) && !e.filename.includes("/attachments/"),
+      )
+
+      const channelAttachmentEntries = entries.filter(
+          e => !e.directory && e.filename.startsWith(`${channel}/attachments/`),
+      )
+
+      console.log(`${channelAttachmentEntries.length} attachments to upload for ${channel}...`)
+
+      await Promise.all(
+        channelAttachmentEntries.map(async entry => {
+          const attachment = await parseAttachment(entry);
+          const formData = new FormData();
+          formData.append('file', attachment);
+          return $fetch(`/api/import/channel/${entry.filename}`, {
+            method: 'POST',
+            body: formData
+          })
+        })
       )
 
       const data = await parseData(channelEntries)

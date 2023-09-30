@@ -20,8 +20,14 @@ export const useZip = () => {
     return parsedData
   }
 
+  const parseAttachment = async (entry: zip.Entry): Promise<any> => {
+    const writer = new zip.BlobWriter('utf-8')
+    return entry.getData?.(writer);
+  }
+
   return {
     readZip,
     parseData,
+    parseAttachment,
   }
 }
