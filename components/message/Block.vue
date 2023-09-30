@@ -1,40 +1,40 @@
 <script lang="ts" setup>
 import type { Block } from '~/types/Message'
 
-defineProps<{ node: Block }>()
+const props = defineProps<{ node: Block }>();
+
+const nodeBlock = computed(() => props.node.Raw ? JSON.parse(props.node.Raw) : props.node)
+const nodeType = computed(() => props.node.Type ? props.node.Type : props.node.type)
+
 </script>
 
 <template>
   <MessageBlocksRichText
-    v-if="node.type === 'rich_text'"
+    v-if="nodeType === 'rich_text'"
     :key="node.block_id"
-    :node="node"
+    :node="nodeBlock"
   />
   <MessageBlocksRichTextSection
-    v-else-if="node.type === 'rich_text_section'"
-    :node="node"
+    v-else-if="nodeType === 'rich_text_section'"
+    :node="nodeBlock"
   />
-  <MessageBlocksText v-else-if="node.type === 'text'" :node="node" />
-  <MessageBlocksEmoji v-else-if="node.type === 'emoji'" :node="node" />
-  <MessageBlocksLink v-else-if="node.type === 'link'" :node="node" />
-  <MessageBlocksUser v-else-if="node.type === 'user'" :node="node" />
-  <MessageBlocksBroadcast v-else-if="node.type === 'broadcast'" :node="node" />
+  <MessageBlocksText v-else-if="nodeType === 'text'" :node="nodeBlock" />
+  <MessageBlocksEmoji v-else-if="nodeType === 'emoji'" :node="nodeBlock" />
+  <MessageBlocksLink v-else-if="nodeType === 'link'" :node="nodeBlock" />
+  <MessageBlocksUser v-else-if="nodeType === 'user'" :node="nodeBlock" />
+  <MessageBlocksBroadcast v-else-if="nodeType === 'broadcast'" :node="nodeBlock" />
   <MessageBlocksRichTextQuote
-    v-else-if="node.type === 'rich_text_quote'"
-    :node="node"
+    v-else-if="nodeType === 'rich_text_quote'"
+    :node="nodeBlock"
   />
   <MessageBlocksRichTextList
-    v-else-if="node.type === 'rich_text_list'"
-    :node="node"
+    v-else-if="nodeType === 'rich_text_list'"
+    :node="nodeBlock"
   />
-  <MessageBlocksChannel v-else-if="node.type === 'channel'" :node="node" />
+  <MessageBlocksChannel v-else-if="nodeType === 'channel'" :node="nodeBlock" />
   <MessageBlocksRichTextPreformatted
-    v-else-if="node.type === 'rich_text_preformatted'"
-    :node="node"
-  />
-  <MessageBlocksRichTextPreformatted
-      v-else-if="node.Type === 'rich_text_preformatted'"
-      :node="JSON.parse(node.Raw)"
+    v-else-if="nodeType === 'rich_text_preformatted'"
+    :node="nodeBlock"
   />
   <p v-else class="text-warning">
     {{ node }}

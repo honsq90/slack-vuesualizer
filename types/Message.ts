@@ -19,7 +19,7 @@ export interface Attachment {
   title_link: string
 }
 
-export interface TextLeaf {
+export interface TextLeaf extends SlackDumpMessage  {
   style?: {
     bold?: boolean
     italic?: boolean
@@ -30,48 +30,48 @@ export interface TextLeaf {
   text: string
 }
 
-export interface EmojiLeaf {
+export interface EmojiLeaf extends SlackDumpMessage  {
   type: 'emoji'
   name: string
   unicode?: string
 }
 
-export interface UserLeaf {
+export interface UserLeaf extends SlackDumpMessage  {
   type: 'user'
   user_id: string
 }
 
-export interface BroadcastLeaf {
+export interface BroadcastLeaf extends SlackDumpMessage  {
   type: 'broadcast'
   range: string
 }
 
-export interface LinkLeaf {
+export interface LinkLeaf extends SlackDumpMessage  {
   type: 'link'
   url: string
 }
 
-export interface ChannelLeaf {
+export interface ChannelLeaf extends SlackDumpMessage  {
   type: 'channel'
   channel_id: string
 }
 
-export interface RichTextQuote {
+export interface RichTextQuote extends SlackDumpMessage {
   type: 'rich_text_quote'
   elements: Block[]
 }
 
-export interface RichTextPreformatted {
+export interface RichTextPreformatted extends SlackDumpMessage {
   type: 'rich_text_preformatted'
   elements: Block[]
 }
 
-export interface RichTextSection {
+export interface RichTextSection extends SlackDumpMessage {
   type: 'rich_text_section'
   elements: Block[]
 }
 
-export interface RichTextList {
+export interface RichTextList extends SlackDumpMessage {
   type: 'rich_text_list'
   elements: Block[]
   indent: number
@@ -79,10 +79,16 @@ export interface RichTextList {
   style: 'ordered' | 'bullet'
 }
 
-export interface RichText {
+export interface RichText extends SlackDumpMessage {
   type: 'rich_text'
   block_id: string
   elements: Block[]
+}
+
+export interface SlackDumpMessage {
+  Type?: string;
+  Raw?: string;
+  block_id?: string;
 }
 
 export type Block =
