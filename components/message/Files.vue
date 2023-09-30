@@ -14,21 +14,24 @@ defineProps<Props>()
     <div>
       <ul v-for="file in files" :key="file.id">
         <li>
-          <video v-if="'mimetype' in file && file.mimetype.includes('video')"
-                 :src="`/${file.url_private}`"
-                 :type="file.mimetype"
-                 controls
-          />
-          <img v-else-if="'mimetype' in file && file.mimetype.includes('image')"
-               :src="`/${file.url_private}`"/>
-          <a v-else-if="'name' in file"
+          <a v-if="'name' in file"
             class="fancy-link"
             :href="`/${file.url_private}`"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FileIcon class="w-8 h-8" />
-            <span>{{ file.name }}</span>
+            <img v-if="file.mimetype.includes('image')"
+                 :src="`/${file.url_private}`" class="max-h-[600px]"/>
+            <video v-else-if="file.mimetype.includes('video')"
+                   :src="`/${file.url_private}`"
+                   :type="file.mimetype"
+                   controls
+                   class="max-h-[600px]"
+            />
+            <span v-else>
+              <FileIcon class="w-8 h-8" />
+              <span>{{ file.name }}</span>
+            </span>
           </a>
           <span v-else>{{ file.mode }}</span>
         </li>
