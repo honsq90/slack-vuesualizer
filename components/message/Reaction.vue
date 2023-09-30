@@ -23,15 +23,16 @@ const userNames = computed(() =>
 
 <template>
   <Popover class="relative">
-    <PopoverButton class="badge badge-ghost">
-      <span v-html="emojiUnicode" />
+    <PopoverButton class="badge badge-ghost align-middle">
+      <img v-if="emojiUnicode.includes(name)" :src="`/emojis/${name}.png`" class="max-h-[14px]" :title="name">
+      <span v-else v-html="emojiUnicode" />
       <span class="ml-1">{{ reaction.count }}</span>
     </PopoverButton>
     <Transition name="slide-y">
       <PopoverPanel
-        class="absolute z-10 text-sm left-1/2 -translate-x-1/2 py-2 px-4 bg-base-100 text-base-content rounded-lg shadow-lg leading-relaxed ring-1 ring-black/10 dark:ring-slate-300/25"
+        class="absolute z-10 text-sm left-1/2 -translate-x-1/2 px-2 bg-base-100 text-base-content rounded-lg shadow-lg leading-relaxed ring-1 ring-black/10 dark:ring-slate-300/25"
       >
-        <div v-for="user in userNames" :key="user">
+        <div class="whitespace-nowrap" v-for="user in userNames" :key="user">
           {{ user }}
         </div>
       </PopoverPanel>
