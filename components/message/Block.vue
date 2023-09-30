@@ -32,6 +32,10 @@ defineProps<{ node: Block }>()
     v-else-if="node.type === 'rich_text_preformatted'"
     :node="node"
   />
+  <MessageBlocksRichTextPreformatted
+      v-else-if="node.Type === 'rich_text_preformatted'"
+      :node="JSON.parse(node.Raw)"
+  />
   <p v-else class="text-warning">
     {{ node }}
   </p>
