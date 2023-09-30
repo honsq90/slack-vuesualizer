@@ -20,7 +20,7 @@ whenever(date, (d) => {
 </script>
 
 <template>
-  <section class="flex flex-col h-full w-full max-w-xl">
+  <section class="flex flex-col h-full w-full">
     <div v-if="pending" class="flex flex-col gap-4 overflow-y-hidden">
       <MessageSkeleton
         v-for="i in [1, 2, 3, 4, 5, 6, 7]"
