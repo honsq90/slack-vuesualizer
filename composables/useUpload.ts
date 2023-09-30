@@ -18,7 +18,7 @@ export const useUpload = () => {
       await sema.acquire()
       queue.value.add(channel)
       const channelEntries = entries.filter(
-        e => !e.directory && e.filename.startsWith(`${channel}/`),
+        e => !e.directory && e.filename.startsWith(`${channel}/`) && !e.filename.includes("/attachments/"),
       )
 
       const data = await parseData(channelEntries)
@@ -42,6 +42,7 @@ export const useUpload = () => {
       done.value.add(channel)
     }
     catch (e) {
+      console.error(e)
       errors.value.add(channel)
     }
     finally {
@@ -54,7 +55,9 @@ export const useUpload = () => {
     try {
       queue.value.add('vuesualizer-workspace')
       const workspaceEntries = entries.filter(
-        e => !e.filename.includes('/') && !e.directory,
+        e => {
+          return !e.filename.includes('/') && !e.directory && !e.filename.includes("/attachments/")
+        },
       )
       let data = await Promise.all(
         workspaceEntries.map(async e => ({
