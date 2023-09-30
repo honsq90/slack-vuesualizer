@@ -28,7 +28,7 @@ const timestamp = computed(() => toTs(props.message.ts))
 <template>
   <div
     class="grid row-auto grid-cols-[3rem,minmax(0,1fr),auto] lg:grid-cols-[4rem,minmax(0,1fr),auto] auto-cols-max px-2 py-1 min-h-12 relative"
-    :class="{ 'ml-6': message.reply, 'pb-6': message.last_reply, 'animate-blink': searched }"
+    :class="{ 'ml-16' : message.reply, 'pb-6': message.last_reply, 'animate-blink': searched }"
   >
     <UserAvatar
       class="w-12 h-12 rounded-xl"
