@@ -23,7 +23,7 @@ defineProps<Props>()
           <a
             v-if="'name' in file"
             class="fancy-link"
-            :href="file.url_private"
+            :href="`/${file.url_private}`"
             target="_blank"
             rel="noopener noreferrer"
           >

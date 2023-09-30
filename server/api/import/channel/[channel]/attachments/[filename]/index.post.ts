@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   for (let i = 0; i < files.length; i++) {
     if (files[i].name === 'file') {
       const data = files[i].data;
-      const filePath = `./public/${filename}`;
+      const filePath = `./public/attachments/${filename}`;
       await writeFile(filePath, data);
     }
   }

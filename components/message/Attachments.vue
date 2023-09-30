@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { Attachment } from '~~/types/Message'
 
+// TODO: link
 interface Props {
   attachments: Attachment[]
 }
