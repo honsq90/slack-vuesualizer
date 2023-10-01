@@ -21,24 +21,6 @@ export const useUpload = () => {
         e => !e.directory && e.filename.startsWith(`${channel}/`) && !e.filename.includes("/attachments/"),
       )
 
-      const channelAttachmentEntries = entries.filter(
-          e => !e.directory && e.filename.startsWith(`${channel}/attachments/`),
-      )
-
-      console.log(`${channelAttachmentEntries.length} attachments to upload for ${channel}...`)
-
-      await Promise.all(
-        channelAttachmentEntries.map(async entry => {
-          const attachment = await parseAttachment(entry);
-          const formData = new FormData();
-          formData.append('file', attachment);
-          return $fetch(`/api/import/channel/${entry.filename}`, {
-            method: 'POST',
-            body: formData
-          })
-        })
-      )
-
       const data = await parseData(channelEntries)
 
       // split into groups to prevent request from being too large for Vercel to handle
@@ -56,6 +38,22 @@ export const useUpload = () => {
           }),
         ),
       )
+
+      const channelAttachmentEntries = entries.filter(
+          e => !e.directory && e.filename.startsWith(`${channel}/attachments/`),
+      )
+
+      console.log(`${channelAttachmentEntries.length} attachments to upload for ${channel}...`)
+
+      for (const entry of channelAttachmentEntries) {
+        const attachment = await parseAttachment(entry);
+        const formData = new FormData();
+        formData.append('file', attachment);
+        await $fetch(`/api/import/channel/${entry.filename}`, {
+          method: 'POST',
+          body: formData,
+        });
+      }
 
       done.value.add(channel)
     }
