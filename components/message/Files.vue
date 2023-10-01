@@ -16,14 +16,14 @@ defineProps<Props>()
         <li>
           <a v-if="'name' in file"
             class="fancy-link"
-            :href="`/${file.url_private}`"
+            :href="`/api/${file.url_private}`"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img v-if="file.mimetype.includes('image')"
-                 :src="`/${file.url_private}`" class="max-h-[600px]"/>
+                 :src="`/api/${file.url_private}`" class="max-h-[600px]"/>
             <video v-else-if="file.mimetype.includes('video')"
-                   :src="`/${file.url_private}`"
+                   :src="`/api/${file.url_private}`"
                    :type="file.mimetype"
                    controls
                    class="max-h-[600px]"

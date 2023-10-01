@@ -1,4 +1,3 @@
-import { writeFile, stat } from "fs/promises";
 import { mongo } from '~~/server/utils/mongo'
 import mime from "mime-types";
 
@@ -18,19 +17,13 @@ export default defineEventHandler(async (event) => {
   for (let i = 0; i < files.length; i++) {
     let multiPartDatum = files[i];
     if (multiPartDatum.name === 'file') {
-      const data = multiPartDatum.data;
+      const data = multiPartDatum.data.toString("base64");
       const type = mime.lookup(filename);
 
-      const filePath = `./public/attachments/${filename}`;
       await db
           .collection('attachments')
           .insertOne({channel, data, filename, type})
 
-      try {
-        await stat(filePath);
-      } catch (e) {
-        await writeFile(filePath, data);
-      }
     }
   }
   event.node.res.statusCode = 201
