@@ -1,10 +1,5 @@
 FROM node:18-alpine
-
-ARG MODE=production
-ARG PORT=3000
-
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=${PORT}
+ARG PORT=5000
 
 WORKDIR /app
 
@@ -12,14 +7,15 @@ RUN rm -rf /var/cache/apk/*
 
 COPY package*.json ./
 
+RUN mkdir -p uploads/emojis
+RUN mkdir -p uploads/attachments
+
 RUN npm ci && npm cache clean --force
 
 COPY . .
 
 ENV NODE_ENV=${MODE}
 
-RUN npm run build
-
 EXPOSE ${PORT}
 
-CMD ["npm", "run", "preview"]
+CMD ["node", "file-server.js"]
