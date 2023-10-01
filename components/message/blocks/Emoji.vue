@@ -9,6 +9,6 @@ const { emojiUnicode } = useEmoji(name)
 </script>
 
 <template>
-  <img v-if="emojiUnicode.includes(node.name)" :src="`/emojis/${node.name}.png`" class="max-h-[14px]" :title="node.name">
+  <img v-if="emojiUnicode.includes(node.name)" :src="`/api/emojis/${node.name}`" class="max-h-[14px]" :title="node.name" :alt="node.name">
   <span v-else :title="node.name" v-html="emojiUnicode" />
 </template>
