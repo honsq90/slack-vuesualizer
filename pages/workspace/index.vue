@@ -8,6 +8,5 @@
     <StatsUsers />
     <StatsChannels />
     <StatsMessages />
-    <StatsEmojis />
   </div>
 </template>
