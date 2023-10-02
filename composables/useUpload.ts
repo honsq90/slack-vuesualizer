@@ -49,7 +49,9 @@ export const useUpload = () => {
         const attachment = await parseAttachment(entry);
         const formData = new FormData();
         formData.append('file', attachment);
-        await $fetch(`/api/import/channel/${entry.filename}`, {
+        const parts = entry.filename.split("/");
+        const filename = parts[parts.length - 1];
+        await $fetch(`http://localhost:5000/upload/attachment/${filename}`, {
           method: 'POST',
           body: formData,
         });

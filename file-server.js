@@ -13,8 +13,8 @@ const createStorage = dest => {
             cb(null, dest);
         },
         filename: function (req, file, cb) {
-            let emoji = req.params.name;
-            cb(null, `${emoji}.png`);
+            let filename = req.params.name;
+            cb(null, filename);
         },
     });
     return multer({ storage: storage });
@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/upload/emoji/:name", emojiStore.single("file"), uploadFiles);
-app.post("/upload/attachment", attachmentStore.single("file"), uploadFiles);
+app.post("/upload/attachment/:name", attachmentStore.single("file"), uploadFiles);
 app.use("/static", express.static(staticDirectory), serveIndex(staticDirectory, {'icons': true}));
 
 function uploadFiles(req, res) {

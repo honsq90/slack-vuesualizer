@@ -6,7 +6,11 @@ interface Props {
   files: File[]
 }
 
-defineProps<Props>()
+let props = defineProps<Props>();
+
+const getStaticUrl = (url: string) =>
+    `http://localhost:5000/static/${url}`
+
 </script>
 
 <template>
@@ -16,14 +20,14 @@ defineProps<Props>()
         <li>
           <a v-if="'name' in file"
             class="fancy-link"
-            :href="`/api/${file.url_private}`"
+            :href="getStaticUrl(file.url_private)"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img v-if="file.mimetype.includes('image')"
-                 :src="`/api/${file.url_private}`" class="max-h-[600px]"/>
+                 :src="getStaticUrl(file.url_private)" class="max-h-[600px]"/>
             <video v-else-if="file.mimetype.includes('video')"
-                   :src="`/api/${file.url_private}`"
+                   :src="getStaticUrl(file.url_private)"
                    :type="file.mimetype"
                    controls
                    class="max-h-[600px]"

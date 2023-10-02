@@ -25,4 +25,4 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - .nuxt/uploads:/app/uploads
+      - /tmp/uploads:/app/uploads

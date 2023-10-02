@@ -21,7 +21,7 @@ watch(file, async () => {
         const attachment = await parseAttachment(entry);
         const formData = new FormData();
         formData.append('file', attachment);
-        const emojiName = entry.filename.replace("emojis/", "").replace(".png", "");
+        const emojiName = entry.filename.replace("emojis/", "");
         await $fetch(`http://localhost:5000/upload/emoji/${emojiName}`, {
           method: 'POST',
           body: formData,
