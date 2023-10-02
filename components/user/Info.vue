@@ -14,7 +14,7 @@ defineProps<Props>()
 <template>
   <div class="flex justify-start gap-4 bg-base-100 text-base-content">
     <UserAvatar
-      class="h-16 md:h-24 lg:h-44 w-16 md:w-24 lg:w-44 rounded-box"
+      class="h-16 w-16 rounded-box"
       :src="user.profile.image_192"
     />
     <div class="flex flex-col grow">
