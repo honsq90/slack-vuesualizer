@@ -24,6 +24,7 @@ const nodeType = computed(() => props.node.Type ? props.node.Type : props.node.t
   <MessageBlocksUser v-else-if="nodeType === 'user'" :node="nodeBlock" />
   <MessageBlocksImage v-else-if="nodeType === 'image'" :node="nodeBlock" />
   <MessageBlocksContext v-else-if="nodeType === 'context'" :node="nodeBlock" />
+  <MessageBlocksSection v-else-if="nodeType === 'section'" :node="nodeBlock" />
   <MessageBlocksMarkdown v-else-if="nodeType === 'mrkdwn'" :node="nodeBlock" />
   <MessageBlocksBroadcast v-else-if="nodeType === 'broadcast'" :node="nodeBlock" />
   <MessageBlocksRichTextQuote

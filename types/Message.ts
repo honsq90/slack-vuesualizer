@@ -58,9 +58,17 @@ export interface ContextLeaf extends SlackDumpMessage  {
   elements: Block[]
 }
 
+
+export interface SectionLeaf extends SlackDumpMessage  {
+  type: 'context'
+  fields: Block[]
+  text?: MarkdownLeaf
+}
+
 export interface MarkdownLeaf extends SlackDumpMessage  {
   type: 'mrkdwn'
   text: string
+  verbatim: boolean
 }
 
 export interface BroadcastLeaf extends SlackDumpMessage  {

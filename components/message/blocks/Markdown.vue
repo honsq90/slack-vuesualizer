@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import type { MarkdownLeaf } from '~~/types/Message';
+import MarkdownIt from "markdown-it";
 
-defineProps<{ node: MarkdownLeaf }>()
+const markdown = new MarkdownIt({
+  html: true,
+  linkify: true,
+});
+
+defineProps<{ node: MarkdownLeaf }>();
 </script>
 
 <template>
-  <span
-    class="italic"
-    v-text="node.text"
-  />
+  <span v-html="markdown.render(node.text)"/>
 </template>
