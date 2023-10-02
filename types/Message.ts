@@ -17,6 +17,8 @@ export interface Attachment {
   color: string
   fallback: string
   title_link: string
+  title: string
+  text: string
 }
 
 export interface TextLeaf extends SlackDumpMessage  {

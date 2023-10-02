@@ -10,17 +10,16 @@ defineProps<Props>()
 </script>
 
 <template>
-  <div class="p-2">
-    <div class="font-bold mb-2">
-      Attachments
-    </div>
+  <div>
     <ul
       v-for="attachment in attachments"
       :key="attachment.id"
       class="flex flex-col gap-2"
     >
       <li>
-        <p>{{ attachment.fallback }}</p>
+        <p class="font-bold">{{ attachment.fallback }}</p>
+        <p class="italic" v-if="attachment.title">{{ attachment.title }}</p>
+        <p v-if="attachment.text">{{ attachment.text }}</p>
         <a
           v-if="attachment.title_link"
           class="fancy-link"
@@ -30,6 +29,7 @@ defineProps<Props>()
         >
           <span>{{ attachment.title_link }}</span>
         </a>
+
       </li>
     </ul>
   </div>
