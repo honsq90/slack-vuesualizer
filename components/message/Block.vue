@@ -36,6 +36,7 @@ const nodeType = computed(() => props.node.Type ? props.node.Type : props.node.t
     :node="nodeBlock"
   />
   <MessageBlocksChannel v-else-if="nodeType === 'channel'" :node="nodeBlock" />
+  <MessageBlocksDivider v-else-if="nodeType === 'divider'" :node="nodeBlock" />
   <MessageBlocksRichTextPreformatted
     v-else-if="nodeType === 'rich_text_preformatted'"
     :node="nodeBlock"

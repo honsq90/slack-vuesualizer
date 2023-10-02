@@ -59,6 +59,10 @@ export interface ContextLeaf extends SlackDumpMessage  {
 }
 
 
+export interface DividerLeaf extends SlackDumpMessage  {
+  type: 'divider'
+}
+
 export interface SectionLeaf extends SlackDumpMessage  {
   type: 'context'
   fields: Block[]
