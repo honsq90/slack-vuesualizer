@@ -55,19 +55,6 @@ const timestamp = computed(() => toTs(props.message.ts))
       </p>
     </div>
     <SearchIcon v-if="searched" class="w-8 h-8 self-center mr-2" />
-    <div v-if="message.reactions" class="flex gap-2 col-start-2 flex-wrap">
-      <MessageReaction
-        v-for="(reaction, i) in message.reactions"
-        :key="i"
-        :reaction="reaction"
-      />
-    </div>
-    <MessageReplies
-      v-if="!simple && hasReplies"
-      class="col-start-2"
-      :reply-count="message.reply_count"
-      :users="message.reply_users"
-    />
     <MessageFiles
       v-if="!simple && message.files"
       class="col-start-2"
@@ -77,6 +64,19 @@ const timestamp = computed(() => toTs(props.message.ts))
       v-if="!simple && message.attachments"
       class="col-start-2"
       :attachments="message.attachments"
+    />
+    <div v-if="message.reactions" class="flex gap-2 col-start-2 flex-wrap">
+      <MessageReaction
+          v-for="(reaction, i) in message.reactions"
+          :key="i"
+          :reaction="reaction"
+      />
+    </div>
+    <MessageReplies
+        v-if="!simple && hasReplies"
+        class="col-start-2"
+        :reply-count="message.reply_count"
+        :users="message.reply_users"
     />
   </div>
 </template>

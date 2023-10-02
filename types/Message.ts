@@ -41,6 +41,28 @@ export interface UserLeaf extends SlackDumpMessage  {
   user_id: string
 }
 
+export interface ImageLeaf extends SlackDumpMessage  {
+  type: 'image'
+  image_url: string
+  alt_text: string
+  block_id: string
+  title: {
+    type: string
+    text: string
+    emoji: boolean
+  }
+}
+
+export interface ContextLeaf extends SlackDumpMessage  {
+  type: 'context'
+  elements: Block[]
+}
+
+export interface MarkdownLeaf extends SlackDumpMessage  {
+  type: 'mrkdwn'
+  text: string
+}
+
 export interface BroadcastLeaf extends SlackDumpMessage  {
   type: 'broadcast'
   range: string

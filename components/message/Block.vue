@@ -22,6 +22,9 @@ const nodeType = computed(() => props.node.Type ? props.node.Type : props.node.t
   <MessageBlocksEmoji v-else-if="nodeType === 'emoji'" :node="nodeBlock" />
   <MessageBlocksLink v-else-if="nodeType === 'link'" :node="nodeBlock" />
   <MessageBlocksUser v-else-if="nodeType === 'user'" :node="nodeBlock" />
+  <MessageBlocksImage v-else-if="nodeType === 'image'" :node="nodeBlock" />
+  <MessageBlocksContext v-else-if="nodeType === 'context'" :node="nodeBlock" />
+  <MessageBlocksMarkdown v-else-if="nodeType === 'mrkdwn'" :node="nodeBlock" />
   <MessageBlocksBroadcast v-else-if="nodeType === 'broadcast'" :node="nodeBlock" />
   <MessageBlocksRichTextQuote
     v-else-if="nodeType === 'rich_text_quote'"
@@ -36,7 +39,7 @@ const nodeType = computed(() => props.node.Type ? props.node.Type : props.node.t
     v-else-if="nodeType === 'rich_text_preformatted'"
     :node="nodeBlock"
   />
-  <p v-else class="text-warning">
+  <pre v-else class="text-warning border-b-2">
     {{ node }}
-  </p>
+  </pre>
 </template>
