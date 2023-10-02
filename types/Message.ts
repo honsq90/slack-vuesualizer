@@ -53,11 +53,24 @@ export interface ImageLeaf extends SlackDumpMessage  {
   }
 }
 
+export interface ActionsLeaf extends SlackDumpMessage  {
+  type: 'actions'
+  elements: Block[]
+}
+
+export interface ButtonLeaf extends SlackDumpMessage  {
+  type: 'button'
+  text: {
+    type: string
+    text: string
+    emoji: boolean
+  }
+}
+
 export interface ContextLeaf extends SlackDumpMessage  {
   type: 'context'
   elements: Block[]
 }
-
 
 export interface DividerLeaf extends SlackDumpMessage  {
   type: 'divider'
