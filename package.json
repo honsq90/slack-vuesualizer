@@ -55,6 +55,7 @@
     "mongodb": "5.8.1",
     "multer": "^1.4.5-lts.1",
     "nuxt-schema-org": "2.2.0",
+    "serve-index": "^1.9.1",
     "vue-virtual-scroller": "2.0.0-beta.8"
   },
   "devDependencies": {

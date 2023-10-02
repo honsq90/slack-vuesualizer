@@ -24,7 +24,7 @@ const userNames = computed(() =>
 <template>
   <Popover class="relative">
     <PopoverButton class="badge badge-ghost align-middle">
-      <img v-if="emojiUnicode.includes(name)" :src="`/api/emojis/${name}`" class="max-h-[14px]" :title="name" :alt="name">
+      <img v-if="emojiUnicode.includes(name)" :src="`http://localhost:5000/static/emojis/${name}.png`" class="max-h-[14px]" :title="name" :alt="name">
       <span v-else v-html="emojiUnicode" />
       <span class="ml-1">{{ reaction.count }}</span>
     </PopoverButton>
